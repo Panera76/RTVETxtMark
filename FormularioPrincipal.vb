@@ -1,11 +1,9 @@
 ﻿Imports System
 Imports System.IO
 Imports System.Text
-Imports iTextSharp.text.pdf
-Imports iTextSharp.text.pdf.parser
 
 Public Class FormularioPrincipal
-    Private Sub btnPaginarTXT_Click(sender As Object, e As EventArgs) Handles btnPaginarTXT.Click
+    Private Sub btnSeleccionarFicheros_Click(sender As Object, e As EventArgs) Handles btnSeleccionarFicheros.Click
         LeerTxt()
     End Sub
 
@@ -14,7 +12,9 @@ Public Class FormularioPrincipal
         ' El formato es %%LA VANGUARDIA / 20180416 / 1~
 
         Dim Cadena As String
+
         Dim NumPaginas As Integer = 0, RutaNombreFichero As String, NombreFichero As String, ResultadoPaginacion As Integer
+
 
         Dim openFileDialog1 As New OpenFileDialog()
         openFileDialog1.Filter = "Text Files|*.txt"
@@ -166,54 +166,5 @@ Public Class FormularioPrincipal
         Return "Error"
     End Function
 
-    Private Sub btnTXTdesdePDF_Click(sender As Object, e As EventArgs) Handles btnTXTdesdePDF.Click
-        LeerPDF()
-    End Sub
 
-    Private Sub LeerPDF()
-        ' El formato es %%LA VANGUARDIA / 20180416 / 1~
-
-        Dim Cadena As String
-        Dim NumPaginas As Integer = 0, RutaNombreFichero As String, NombreFichero As String, TextoPDF As String = "", RutaNombreFicheroTXT As String
-
-        Dim openFileDialog1 As New OpenFileDialog()
-        openFileDialog1.Filter = "PDF Files|*.pdf"
-        openFileDialog1.Title = "Selecciona un fichero"
-        openFileDialog1.Multiselect = True
-        If openFileDialog1.ShowDialog() <> System.Windows.Forms.DialogResult.OK Then
-            Exit Sub
-        End If
-        Dim Fichero As String, i As Integer = 0
-        For Each Fichero In openFileDialog1.FileNames
-
-            TextoPDF = ""
-
-            RutaNombreFichero = openFileDialog1.FileNames(i)
-            NombreFichero = Strings.Left(openFileDialog1.SafeFileNames(i), 8)
-            Dim LectorPDF As New PdfReader(openFileDialog1.FileNames(i))
-            NumPaginas = LectorPDF.NumberOfPages
-
-            Cadena = "%%" & ObtenerPublicacion() & " / " & NombreFichero & " / "
-            RutaNombreFicheroTXT = Strings.Left(RutaNombreFichero, RutaNombreFichero.Length - 3) & "txt"
-
-            For j = 1 To NumPaginas
-                Dim ExtractorPDF As ITextExtractionStrategy = New iTextSharp.text.pdf.parser.SimpleTextExtractionStrategy()
-                Dim TextoPagina As String = PdfTextExtractor.GetTextFromPage(LectorPDF, j, ExtractorPDF)
-                TextoPDF += Cadena & j & "~" & vbCrLf & TextoPagina & vbCrLf
-                If j < NumPaginas Then
-                    TextoPDF += vbFormFeed
-                End If
-                ProgressBar1.Value = j / NumPaginas * 100
-            Next
-
-            Try
-                File.WriteAllText(RutaNombreFicheroTXT, TextoPDF, Encoding.UTF8)
-                MsgBox("Guardado " & RutaNombreFicheroTXT)
-            Catch ex As Exception
-                MessageBox.Show("Error en la escritura del fichero " & RutaNombreFicheroTXT & " - Descripción: " & ex.Message)
-            End Try
-
-            i = i + 1
-        Next
-    End Sub
 End Class
