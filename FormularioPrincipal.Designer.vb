@@ -40,11 +40,14 @@ Partial Class FormularioPrincipal
         Me.rbPE = New System.Windows.Forms.RadioButton()
         Me.rbPA = New System.Windows.Forms.RadioButton()
         Me.rbCO = New System.Windows.Forms.RadioButton()
-        Me.btnSeleccionarFicheros = New System.Windows.Forms.Button()
+        Me.btnPaginarTXT = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.chkSaltoFinal = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnTXTdesdePDF = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.lblProgreso = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -268,15 +271,15 @@ Partial Class FormularioPrincipal
         Me.rbCO.Text = "Correo (CO)"
         Me.rbCO.UseVisualStyleBackColor = True
         '
-        'btnSeleccionarFicheros
+        'btnPaginarTXT
         '
-        Me.btnSeleccionarFicheros.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.btnSeleccionarFicheros.Location = New System.Drawing.Point(12, 355)
-        Me.btnSeleccionarFicheros.Name = "btnSeleccionarFicheros"
-        Me.btnSeleccionarFicheros.Size = New System.Drawing.Size(518, 36)
-        Me.btnSeleccionarFicheros.TabIndex = 6
-        Me.btnSeleccionarFicheros.Text = "Seleccionar Ficheros TXT"
-        Me.btnSeleccionarFicheros.UseVisualStyleBackColor = True
+        Me.btnPaginarTXT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.btnPaginarTXT.Location = New System.Drawing.Point(12, 355)
+        Me.btnPaginarTXT.Name = "btnPaginarTXT"
+        Me.btnPaginarTXT.Size = New System.Drawing.Size(260, 36)
+        Me.btnPaginarTXT.TabIndex = 6
+        Me.btnPaginarTXT.Text = "Paginar Ficheros TXT"
+        Me.btnPaginarTXT.UseVisualStyleBackColor = True
         '
         'PictureBox1
         '
@@ -315,18 +318,48 @@ Partial Class FormularioPrincipal
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(37, 13)
         Me.Label1.TabIndex = 10
-        Me.Label1.Text = "v1.0.1"
+        Me.Label1.Text = "v1.1.0"
+        '
+        'btnTXTdesdePDF
+        '
+        Me.btnTXTdesdePDF.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.btnTXTdesdePDF.Location = New System.Drawing.Point(278, 355)
+        Me.btnTXTdesdePDF.Name = "btnTXTdesdePDF"
+        Me.btnTXTdesdePDF.Size = New System.Drawing.Size(252, 36)
+        Me.btnTXTdesdePDF.TabIndex = 11
+        Me.btnTXTdesdePDF.Text = "Extraer TXT desde PDF"
+        Me.btnTXTdesdePDF.UseVisualStyleBackColor = True
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(12, 397)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(459, 23)
+        Me.ProgressBar1.TabIndex = 12
+        '
+        'lblProgreso
+        '
+        Me.lblProgreso.AutoSize = True
+        Me.lblProgreso.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProgreso.Location = New System.Drawing.Point(18, 423)
+        Me.lblProgreso.Name = "lblProgreso"
+        Me.lblProgreso.Size = New System.Drawing.Size(0, 13)
+        Me.lblProgreso.TabIndex = 13
+        Me.lblProgreso.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'FormularioPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(545, 410)
+        Me.ClientSize = New System.Drawing.Size(545, 438)
+        Me.Controls.Add(Me.lblProgreso)
+        Me.Controls.Add(Me.ProgressBar1)
+        Me.Controls.Add(Me.btnTXTdesdePDF)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.chkSaltoFinal)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.btnSeleccionarFicheros)
+        Me.Controls.Add(Me.btnPaginarTXT)
         Me.Controls.Add(Me.GroupBox1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormularioPrincipal"
@@ -357,9 +390,12 @@ Partial Class FormularioPrincipal
     Friend WithEvents rbPE As RadioButton
     Friend WithEvents rbPA As RadioButton
     Friend WithEvents rbCO As RadioButton
-    Friend WithEvents btnSeleccionarFicheros As Button
+    Friend WithEvents btnPaginarTXT As Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents chkSaltoFinal As CheckBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnTXTdesdePDF As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents lblProgreso As Label
 End Class
